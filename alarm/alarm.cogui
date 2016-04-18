@@ -21,22 +21,39 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
 <editor id="org.coocox.welcome.ui.WelcomePage" name="" partName="welcome" title="welcome" tooltip="" workbook="DefaultEditorWorkbook">
-<input factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory">&#x0A;<org.coocox.welcome.ui.WelcomePage/>
+<input factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory">
+<org.coocox.welcome.ui.WelcomePage/>
 </input>
 </editor>
 <editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="C:/Users/marcin/Documents/GitHub/STMalarmClock/alarm/main.c" title="main.c" tooltip="C:/Users/marcin/Documents/GitHub/STMalarmClock/alarm/main.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/alarm/main.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="8925" selectionTopPixel="3851"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="11244" selectionTopPixel="4863"/>
+</editor>
+<editor id="org.coocox.builder.ui.editors.repository.RepositoryBrowser" name="Repository" partName="Repository" title="Repository" tooltip="Repository" workbook="DefaultEditorWorkbook">
+<input factoryID="org.coocox.component.ui.editors.repository.RepositoryElementFactory">
+<subPage horizontalPosition="0" selectedItemId="509" subPageIndex="2" verticalPosition="0"/>
+</input>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="attributes.h" partName="attributes.h" path="C:/Users/marcin/Documents/GitHub/STMalarmClock/alarm/cmsis_lib/include/attributes.h" title="attributes.h" tooltip="C:/Users/marcin/Documents/GitHub/STMalarmClock/alarm/cmsis_lib/include/attributes.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/alarm/cmsis_lib/include/attributes.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="139"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="defines.h" partName="defines.h" path="C:/Users/marcin/Documents/GitHub/STMalarmClock/alarm/cmsis_lib/include/defines.h" title="defines.h" tooltip="C:/Users/marcin/Documents/GitHub/STMalarmClock/alarm/cmsis_lib/include/defines.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/alarm/cmsis_lib/include/defines.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
 <view id="org.coocox.builder.ui.views.ProjectView" partName="Project">
-<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="0">
+<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="8">
 <expanded>
 <element path="/alarm"/>
 <element path="/alarm/cmsis"/>
@@ -44,10 +61,11 @@
 <element path="/alarm/cmsis_boot/startup"/>
 <element path="/alarm/cmsis_lib"/>
 <element path="/alarm/cmsis_lib/include"/>
+<element path="/alarm/cmsis_lib/source"/>
 <element path="/alarm/syscalls"/>
 </expanded>
 <selection>
-<element path="/alarm/main.c"/>
+<element path="/alarm/cmsis_lib/source"/>
 </selection>
 </viewState>
 </view>
@@ -250,6 +268,14 @@
 </editor>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/alarm/cmsis_boot/startup/startup_stm32f4xx.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/alarm/cmsis_boot/startup/startup_stm32f4xx.c"/>
+<editor factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.welcome.ui.WelcomePage">
+<org.coocox.welcome.ui.WelcomePage/>
+</editor>
+<editor factoryID="org.coocox.component.ui.editors.repository.RepositoryElementFactory" id="org.coocox.builder.ui.editors.repository.RepositoryBrowser">
+<subPage horizontalPosition="0" selectedItemId="509" subPageIndex="2" verticalPosition="0"/>
+</editor>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/alarm/cmsis_lib/include/attributes.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/alarm/cmsis_lib/include/defines.h"/>
 </editors>
 <item historyLabel="welcome" index="0"/>
 <item historyLabel="main.c" index="1">
@@ -302,8 +328,31 @@
 <item historyLabel="main.c" index="1">
 <position/>
 </item>
-<item active="true" historyLabel="main.c" index="1">
+<item historyLabel="main.c" index="1">
 <position/>
+</item>
+<item historyLabel="welcome" index="5"/>
+<item historyLabel="Repository" index="6"/>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="273" y="0"/>
+</item>
+<item historyLabel="Repository" index="6"/>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="9835" y="0"/>
+</item>
+<item historyLabel="welcome" index="5"/>
+<item historyLabel="Repository" index="6"/>
+<item historyLabel="attributes.h" index="7">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="11263" y="0"/>
+</item>
+<item historyLabel="defines.h" index="8">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item active="true" historyLabel="main.c" index="1">
+<position info="not_deleted" x="11263" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -312,47 +361,49 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f4xx.c" tooltip="alarm/cmsis_boot/startup/startup_stm32f4xx.c">
-<persistable path="/alarm/cmsis_boot/startup/startup_stm32f4xx.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="defines.h" tooltip="alarm/cmsis_lib/include/defines.h">
+<persistable path="/alarm/cmsis_lib/include/defines.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="alarm/main.c">
-<persistable path="/alarm/main.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="attributes.h" tooltip="alarm/cmsis_lib/include/attributes.h">
+<persistable path="/alarm/cmsis_lib/include/attributes.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f4xx.c" tooltip="probatimer/cmsis_boot/startup/startup_stm32f4xx.c">
-<persistable path="/probatimer/cmsis_boot/startup/startup_stm32f4xx.c"/>
+<file factoryID="org.coocox.component.ui.editors.repository.RepositoryElementFactory" id="org.coocox.builder.ui.editors.repository.RepositoryBrowser" name="Repository" tooltip="Repository">
+<persistable>
+<subPage horizontalPosition="0" selectedItemId="509" subPageIndex="2" verticalPosition="0"/>
+</persistable>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="kolosy/main.c">
-<persistable path="/kolosy/main.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_rtc.c" tooltip="alarm/cmsis_lib/source/tm_stm32f4_rtc.c">
+<persistable path="/alarm/cmsis_lib/source/tm_stm32f4_rtc.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_tim.c" tooltip="probatimer/cmsis_lib/source/stm32f4xx_tim.c">
-<persistable path="/probatimer/cmsis_lib/source/stm32f4xx_tim.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_spi.h" tooltip="alarm/cmsis_lib/include/tm_stm32f4_spi.h">
+<persistable path="/alarm/cmsis_lib/include/tm_stm32f4_spi.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="probatimer/main.c">
-<persistable path="/probatimer/main.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="glosnik/main.c">
+<persistable path="/glosnik/main.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="pr�batimer/main.c">
-<persistable path="/pr�batimer/main.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_gpio.c" tooltip="alarm/cmsis_lib/source/tm_stm32f4_gpio.c">
+<persistable path="/alarm/cmsis_lib/source/tm_stm32f4_gpio.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="próbatimer/main.c">
-<persistable path="/próbatimer/main.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_gpio.c" tooltip="alarm/cmsis_lib/source/stm32f4xx_gpio.c">
+<persistable path="/alarm/cmsis_lib/source/stm32f4xx_gpio.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4_discovery_lis302dl.c" tooltip="akcelerometr/stm32f4_discovery_lis302dl.c">
-<persistable path="/akcelerometr/stm32f4_discovery_lis302dl.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_gpio.h" tooltip="alarm/cmsis_lib/include/tm_stm32f4_gpio.h">
+<persistable path="/alarm/cmsis_lib/include/tm_stm32f4_gpio.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="akcelerometr/main.c">
-<persistable path="/akcelerometr/main.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_pcd8544.h" tooltip="alarm/cmsis_lib/include/tm_stm32f4_pcd8544.h">
+<persistable path="/alarm/cmsis_lib/include/tm_stm32f4_pcd8544.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="przerwanie/main.c">
-<persistable path="/przerwanie/main.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_pcd8544.c" tooltip="alarm/cmsis_lib/source/tm_stm32f4_pcd8544.c">
+<persistable path="/alarm/cmsis_lib/source/tm_stm32f4_pcd8544.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f4xx.c" tooltip="tiimerkanaly/cmsis_boot/startup/startup_stm32f4xx.c">
-<persistable path="/tiimerkanaly/cmsis_boot/startup/startup_stm32f4xx.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_spi.c" tooltip="alarm/cmsis_lib/source/tm_stm32f4_spi.c">
+<persistable path="/alarm/cmsis_lib/source/tm_stm32f4_spi.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="tiimerkanaly/main.c">
-<persistable path="/tiimerkanaly/main.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_adc.h" tooltip="Projekt Poczatkowy/cmsis_lib/include/stm32f4xx_adc.h">
+<persistable path="/Projekt Poczatkowy/cmsis_lib/include/stm32f4xx_adc.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f4xx.c" tooltip="probatimer/cmsis_boot/startup/startup_stm32f4xx.c">
-<persistable path="/probatimer/cmsis_boot/startup/startup_stm32f4xx.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="laboratoria15.10.14/main.c">
+<persistable path="/laboratoria15.10.14/main.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="tiimerkanaly/main.c">
 <persistable path="/tiimerkanaly/main.c"/>

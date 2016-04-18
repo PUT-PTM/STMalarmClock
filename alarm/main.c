@@ -6,6 +6,8 @@
 #include "attributes.h"
 #include "tm_stm32f4_rtc.h"
 #include "stm32f4xx_tim.h"
+#include "stm32f4xx.h"
+#include "tm_stm32f4_pcd8544.h"
 
 char buf[50], buf2[50];
 TM_RTC_Time_t datatime;
@@ -234,7 +236,17 @@ void Init_Diod() {
 }
 
 
-
+void Init_Tim4(){
+	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
+	/* Time base configuration */
+	TIM_TimeBaseStructure.TIM_Period = 1000;
+	TIM_TimeBaseStructure.TIM_Prescaler = 7199;
+	TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+	TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
+	TIM_Cmd(TIM4, ENABLE);
+}
 
 int main(void)
 {
@@ -246,18 +258,65 @@ int main(void)
             datatime.month = 6;
             datatime.date = 30;
             datatime.day = 6;
-TM_RTC_SetDateTime(&datatime, TM_RTC_Format_BIN); // pierwsze automatyczne ustawienie godziny i czasu
+    TM_RTC_SetDateTime(&datatime, TM_RTC_Format_BIN); // pierwsze automatyczne ustawienie godziny i czasu
 
 	SystemInit();
 	Init_Diod();
+	Init_Tim4();
+	PCD8544_Init(0x38);
+
 	Configure_PB12();
 	Configure_PB13();
 	Configure_PB14();
 	Configure_PB11();
-	    while (1) {
 
-	    }
+	int mrugaj=0;
+
+	while (1) {
+		if(TIM_GetFlagStatus(TIM4, TIM_FLAG_Update))
+				{
+					GPIO_ToggleBits(GPIOD,GPIO_Pin_14);
+
+					if(mrugaj==0)
+					{
+						PCD8544_Clear();
+
+						PCD8544_GotoXY(5, 3);
+						PCD8544_Puts("TIME:", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+						PCD8544_GotoXY(30, 3);
+						PCD8544_Puts(" 15:40", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+						PCD8544_GotoXY(5, 13);
+						PCD8544_Puts("ALARM:", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+						PCD8544_GotoXY(40, 13);
+						PCD8544_Puts("mrugaj", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+						PCD8544_GotoXY(5, 26);
+						PCD8544_Puts("DATE:2015-04-18", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+						PCD8544_Refresh();
+						mrugaj++;
+					}
+					else{
+						PCD8544_Clear();
+
+						PCD8544_GotoXY(5, 3);
+						PCD8544_Puts("TIME:", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+						PCD8544_GotoXY(30, 3);
+						PCD8544_Puts(" 15:40", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+						PCD8544_GotoXY(5, 13);
+						PCD8544_Puts("ALARM:", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+						PCD8544_GotoXY(40, 13);
+						PCD8544_Puts("", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+						PCD8544_GotoXY(5, 26);
+						PCD8544_Puts("DATE:2015-04-18", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+						PCD8544_Refresh();
+						mrugaj=0;
+					}
+					TIM_ClearFlag(TIM4, TIM_FLAG_Update);
+				}
+	}
 }
+
 void TM_RTC_RequestHandler() {
     //Get time
     TM_RTC_GetDateTime(&datatime, TM_RTC_Format_BIN);
