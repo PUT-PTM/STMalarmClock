@@ -3,6 +3,13 @@
 #include "stm32f4xx_syscfg.h"
 #include "stm32f4xx_gpio.h"
 #include "misc.h"
+#include "attributes.h"
+#include "tm_stm32f4_rtc.h"
+#include "stm32f4xx_tim.h"
+
+char buf[50], buf2[50];
+TM_RTC_Time_t datatime;
+
 void Configure_PB11(void) {
     GPIO_InitTypeDef GPIO_InitStruct;
     EXTI_InitTypeDef EXTI_InitStruct;
@@ -231,6 +238,15 @@ void Init_Diod() {
 
 int main(void)
 {
+    TM_RTC_Interrupts(TM_RTC_Int_1s);
+    datatime.hours = 12;
+            datatime.minutes = 0;
+            datatime.seconds = 0;
+            datatime.year = 14;
+            datatime.month = 6;
+            datatime.date = 30;
+            datatime.day = 6;
+TM_RTC_SetDateTime(&datatime, TM_RTC_Format_BIN); // pierwsze automatyczne ustawienie godziny i czasu
 
 	SystemInit();
 	Init_Diod();
