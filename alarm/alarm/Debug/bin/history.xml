@@ -1,23 +1,24 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
-   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -g -nostartfiles -Map=alarm.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\alarm -TC:\CooCox\CoIDE\configuration\ProgramData\alarm/arm-gcc-link.ld -g">
-      <target file="alarm.elf" lastModified="1542afb73ce">
-         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="1542afb5826"/>
-         <source file="..\obj\startup_stm32f4xx.o" lastModified="1542afb5901"/>
-         <source file="..\obj\main.o" lastModified="1542afb5a80"/>
-         <source file="..\obj\stm32f4xx_rcc.o" lastModified="1542afb5c5e"/>
-         <source file="..\obj\tm_stm32f4_spi.o" lastModified="1542afb5e9c"/>
-         <source file="..\obj\stm32f4xx_gpio.o" lastModified="1542afb6003"/>
-         <source file="..\obj\system_stm32f4xx.o" lastModified="1542afb6112"/>
-         <source file="..\obj\syscalls.o" lastModified="1542afb6224"/>
-         <source file="..\obj\tm_stm32f4_rtc.o" lastModified="1542afb63f0"/>
-         <source file="..\obj\stm32f4xx_spi.o" lastModified="1542afb6580"/>
-         <source file="..\obj\stm32f4xx_exti.o" lastModified="1542afb66a8"/>
-         <source file="..\obj\misc.o" lastModified="1542afb67c8"/>
-         <source file="..\obj\tm_stm32f4_gpio.o" lastModified="1542afb6942"/>
-         <source file="..\obj\stm32f4xx_rtc.o" lastModified="1542afb6bf1"/>
-         <source file="..\obj\stm32f4xx_tim.o" lastModified="1542afb6f17"/>
-         <source file="..\obj\tm_stm32f4_pcd8544.o" lastModified="1542afb70fb"/>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -g -nostartfiles -Map=alarm.map -O0 --gc-sections -lm -lgcc -lc -LC:\CooCox\CoIDE\configuration\ProgramData\alarm -TC:\CooCox\CoIDE\configuration\ProgramData\alarm/arm-gcc-link.ld -g">
+      <target file="alarm.elf" lastModified="1542b5194ca">
+         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="1542b51782e"/>
+         <source file="..\obj\stm32f4xx_pwr.o" lastModified="1542b517997"/>
+         <source file="..\obj\startup_stm32f4xx.o" lastModified="1542b517a6b"/>
+         <source file="..\obj\main.o" lastModified="1542b517c49"/>
+         <source file="..\obj\stm32f4xx_rcc.o" lastModified="1542b517e19"/>
+         <source file="..\obj\tm_stm32f4_spi.o" lastModified="1542b517fab"/>
+         <source file="..\obj\stm32f4xx_gpio.o" lastModified="1542b51810a"/>
+         <source file="..\obj\system_stm32f4xx.o" lastModified="1542b518229"/>
+         <source file="..\obj\syscalls.o" lastModified="1542b51833b"/>
+         <source file="..\obj\tm_stm32f4_rtc.o" lastModified="1542b518501"/>
+         <source file="..\obj\stm32f4xx_spi.o" lastModified="1542b51869e"/>
+         <source file="..\obj\stm32f4xx_exti.o" lastModified="1542b5187c9"/>
+         <source file="..\obj\misc.o" lastModified="1542b5188e1"/>
+         <source file="..\obj\tm_stm32f4_gpio.o" lastModified="1542b518a43"/>
+         <source file="..\obj\stm32f4xx_rtc.o" lastModified="1542b518cf2"/>
+         <source file="..\obj\stm32f4xx_tim.o" lastModified="1542b519010"/>
+         <source file="..\obj\tm_stm32f4_pcd8544.o" lastModified="1542b5191cf"/>
       </target>
    </processor>
 </history>

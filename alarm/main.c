@@ -8,6 +8,7 @@
 #include "stm32f4xx_tim.h"
 #include "stm32f4xx.h"
 #include "tm_stm32f4_pcd8544.h"
+#include <stdio.h>
 
 char buf[50], buf2[50];
 TM_RTC_Time_t datatime;
@@ -250,20 +251,24 @@ void Init_Tim4(){
 
 int main(void)
 {
+
+
+	SystemInit();
+	Init_Diod();
+	Init_Tim4();
+	PCD8544_Init(0x38);
+
+	TM_RTC_Init(TM_RTC_ClockSource_Internal);
+
     TM_RTC_Interrupts(TM_RTC_Int_1s);
-    datatime.hours = 12;
-            datatime.minutes = 0;
+    		datatime.hours = 14;
+            datatime.minutes = 56;
             datatime.seconds = 0;
             datatime.year = 14;
             datatime.month = 6;
             datatime.date = 30;
             datatime.day = 6;
     TM_RTC_SetDateTime(&datatime, TM_RTC_Format_BIN); // pierwsze automatyczne ustawienie godziny i czasu
-
-	SystemInit();
-	Init_Diod();
-	Init_Tim4();
-	PCD8544_Init(0x38);
 
 	Configure_PB12();
 	Configure_PB13();
@@ -272,23 +277,48 @@ int main(void)
 
 	int mrugaj=0;
 
+	TM_RTC_GetDateTime(&datatime, TM_RTC_Format_BIN);
+	int h=datatime.hours;
+	char temp[16];
+	itoa(h, temp, 10);
+
+	int m=datatime.minutes;
+	char temp1[16];
+	itoa(m, temp1, 10);
+
+	int s=datatime.seconds;
+	char temp2[16];
+	itoa(s, temp2, 10);
+
 	while (1) {
+
+
 		if(TIM_GetFlagStatus(TIM4, TIM_FLAG_Update))
 				{
 					GPIO_ToggleBits(GPIOD,GPIO_Pin_14);
 
 					if(mrugaj==0)
 					{
+
+
 						PCD8544_Clear();
 
 						PCD8544_GotoXY(5, 3);
 						PCD8544_Puts("TIME:", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
 						PCD8544_GotoXY(30, 3);
-						PCD8544_Puts(" 15:40", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+						PCD8544_Puts(temp, PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+						PCD8544_GotoXY(42, 3);
+						PCD8544_Puts(":", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+						PCD8544_GotoXY(48, 3);
+						PCD8544_Puts(temp1, PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+						PCD8544_GotoXY(60, 3);
+						PCD8544_Puts(":", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+						PCD8544_GotoXY(66, 3);
+						PCD8544_Puts(temp2, PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
 						PCD8544_GotoXY(5, 13);
 						PCD8544_Puts("ALARM:", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
 						PCD8544_GotoXY(40, 13);
-						PCD8544_Puts("mrugaj", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+						PCD8544_Puts(":)", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
 						PCD8544_GotoXY(5, 26);
 						PCD8544_Puts("DATE:2015-04-18", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
 
@@ -301,7 +331,7 @@ int main(void)
 						PCD8544_GotoXY(5, 3);
 						PCD8544_Puts("TIME:", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
 						PCD8544_GotoXY(30, 3);
-						PCD8544_Puts(" 15:40", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+						PCD8544_Puts("", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
 						PCD8544_GotoXY(5, 13);
 						PCD8544_Puts("ALARM:", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
 						PCD8544_GotoXY(40, 13);
