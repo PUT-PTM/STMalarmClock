@@ -258,3 +258,8 @@ TM_RTC_SetDateTime(&datatime, TM_RTC_Format_BIN); // pierwsze automatyczne ustaw
 
 	    }
 }
+void TM_RTC_RequestHandler() {
+    //Get time
+    TM_RTC_GetDateTime(&datatime, TM_RTC_Format_BIN);
+
+}
