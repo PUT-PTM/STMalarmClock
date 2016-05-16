@@ -8,10 +8,234 @@
 #include "stm32f4xx_tim.h"
 #include "stm32f4xx.h"
 #include "tm_stm32f4_pcd8544.h"
-#include <stdio.h>
 
+int test=15;
 char buf[50], buf2[50];
+int alarmhours=12, alarmminutes=00;
 TM_RTC_Time_t datatime;
+int a=0,b=0;
+int active=0;
+int yeartemp=0, monthtemp=0, daytemp=0, hourstemp=0, minutestemp=0;
+
+
+void wyswietl_wszystko()
+{
+    TM_RTC_GetDateTime(&datatime, TM_RTC_Format_BIN);
+
+	int h=datatime.hours;
+	char hours[16];
+	itoa(h, hours, 10);
+
+	int m=datatime.minutes;
+	char minutes[16];
+	itoa(m, minutes, 10);
+
+	int s=datatime.seconds;
+	char sec[16];
+	itoa(s, sec, 10);
+
+	int y=datatime.year + 2000;
+	char year[16];
+	itoa(y, year, 10);
+
+	int mon=datatime.month;
+	char month[16];
+	itoa(mon, month, 10);
+
+	int d=datatime.date;
+	char day[16];
+	itoa(d, day, 10);
+
+	int hour=alarmhours;
+	char hours_alarm[16];
+	itoa(hour, hours_alarm, 10);
+
+	int min=alarmminutes;
+	char minutes_alarm[16];
+	itoa(min, minutes_alarm, 10);
+
+//wyswietlanie w jednym kolorze czarnym godziny i daty
+	PCD8544_Clear();
+
+	PCD8544_GotoXY(5, 3);
+	PCD8544_Puts("TIME:", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+	PCD8544_GotoXY(30, 3);
+	PCD8544_Puts(hours, PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+	PCD8544_GotoXY(42, 3);
+	PCD8544_Puts(":", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+	PCD8544_GotoXY(48, 3);
+	PCD8544_Puts(minutes, PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+	PCD8544_GotoXY(60, 3);
+	PCD8544_Puts(":", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+	PCD8544_GotoXY(66, 3);
+	PCD8544_Puts(sec, PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+
+	PCD8544_GotoXY(5, 13);
+	PCD8544_Puts("ALARM:", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+	PCD8544_GotoXY(40, 13);
+	PCD8544_Puts(hours_alarm, PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+	PCD8544_GotoXY(52, 13);
+	PCD8544_Puts(":", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+	PCD8544_GotoXY(58, 13);
+	PCD8544_Puts(minutes_alarm, PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+
+	PCD8544_GotoXY(5, 26);
+	PCD8544_Puts("DATE:", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+	PCD8544_GotoXY(25, 26);
+	PCD8544_Puts(year, PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+	PCD8544_GotoXY(41, 26);
+	PCD8544_Puts("-", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+	PCD8544_GotoXY(45, 26);
+	PCD8544_Puts(month, PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+	PCD8544_GotoXY(54, 26);
+	PCD8544_Puts("-", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+	PCD8544_GotoXY(59, 26);
+	PCD8544_Puts(day, PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+	PCD8544_GotoXY(5, 32);
+	PCD8544_Puts("Alarm state: ", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+	if(active==0)
+	{
+		PCD8544_GotoXY(57, 32);
+		PCD8544_Puts("OFF ", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+	}
+	else
+	{
+		PCD8544_GotoXY(57, 32);
+		PCD8544_Puts("ON ", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+	}
+
+	PCD8544_Refresh();
+}
+void wyswietl_date_hours()
+{
+			int h=hourstemp;
+			char hours[16];
+			itoa(h, hours, 10);
+
+			int m=minutestemp;
+			char minutes[16];
+			itoa(m, minutes, 10);
+
+			int y=yeartemp + 2000;
+			char year[16];
+			itoa(y, year, 10);
+
+			int mon=monthtemp;
+			char month[16];
+			itoa(mon, month, 10);
+
+			int d=daytemp;
+			char day[16];
+			itoa(d, day, 10);
+
+			PCD8544_Clear();
+
+			PCD8544_GotoXY(5, 3);
+			PCD8544_Puts("TIME:", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+			PCD8544_GotoXY(30, 3);
+			PCD8544_Puts(hours, PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+			PCD8544_GotoXY(42, 3);
+			PCD8544_Puts(":", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+			PCD8544_GotoXY(48, 3);
+			PCD8544_Puts(minutes, PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+
+			PCD8544_GotoXY(5, 26);
+			PCD8544_Puts("DATE:", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+			PCD8544_GotoXY(25, 26);
+			PCD8544_Puts(year, PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+			PCD8544_GotoXY(41, 26);
+			PCD8544_Puts("-", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+			PCD8544_GotoXY(45, 26);
+			PCD8544_Puts(month, PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+			PCD8544_GotoXY(54, 26);
+			PCD8544_Puts("-", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+			PCD8544_GotoXY(59, 26);
+			PCD8544_Puts(day, PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+}
+
+void wyswietl_alarm()
+{
+	int h=alarmhours;
+	char hours[16];
+	itoa(h, hours, 10);
+
+	int m=alarmminutes;
+	char minutes[16];
+	itoa(m, minutes, 10);
+
+
+	PCD8544_Clear();
+
+	PCD8544_GotoXY(5, 3);
+	PCD8544_Puts("Alarm:", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+	PCD8544_GotoXY(41, 3);
+	PCD8544_Puts(hours, PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+	PCD8544_GotoXY(53, 3);
+	PCD8544_Puts(":", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+	PCD8544_GotoXY(59, 3);
+	PCD8544_Puts(minutes, PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
+
+
+	PCD8544_GotoXY(5, 32);
+	PCD8544_Puts("Alarm state: ", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+	if(active==0)
+	{
+		PCD8544_GotoXY(57, 32);
+		PCD8544_Puts("OFF ", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+	}
+	else
+	{
+		PCD8544_GotoXY(57, 32);
+		PCD8544_Puts("ON ", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+	}
+
+}
+
+void przycisk (){
+	for (int i=0; i<100;i++);
+}
+void Configure_PB9(void) {
+    GPIO_InitTypeDef GPIO_InitStruct;
+    EXTI_InitTypeDef EXTI_InitStruct;
+    NVIC_InitTypeDef NVIC_InitStruct;
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+    GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN;
+    GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
+    GPIO_InitStruct.GPIO_Pin = GPIO_Pin_9;
+    GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP;
+    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_100MHz;
+    GPIO_Init(GPIOB, &GPIO_InitStruct);
+    SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource9);
+
+    /* PB12 is connected to EXTI_Line12 */
+    EXTI_InitStruct.EXTI_Line = GPIO_Pin_9;
+    /* Enable interrupt */
+    EXTI_InitStruct.EXTI_LineCmd = ENABLE;
+    /* Interrupt mode */
+    EXTI_InitStruct.EXTI_Mode = EXTI_Mode_Interrupt;
+    /* Triggers on rising and falling edge */
+    EXTI_InitStruct.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
+    /* Add to EXTI */
+    EXTI_Init(&EXTI_InitStruct);
+
+    /* Add IRQ vector to NVIC */
+    /* PB12 is connected to EXTI_Line12, which has EXTI15_10_IRQn vector */
+    NVIC_InitStruct.NVIC_IRQChannel = EXTI9_5_IRQn;
+    /* Set priority */
+    NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0x00;
+    /* Set sub priority */
+    NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0x01;
+    /* Enable interrupt */
+    NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+    /* Add to NVIC */
+    NVIC_Init(&NVIC_InitStruct);
+}
+
 
 void Configure_PB11(void) {
     GPIO_InitTypeDef GPIO_InitStruct;
@@ -165,59 +389,418 @@ void Configure_PB14(void) {
     NVIC_Init(&NVIC_InitStruct4);
 }
 
+
+void Configure_PB15(void) {
+    GPIO_InitTypeDef GPIO_InitStruct;
+    EXTI_InitTypeDef EXTI_InitStruct;
+    NVIC_InitTypeDef NVIC_InitStruct;
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+    GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN;
+    GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
+    GPIO_InitStruct.GPIO_Pin = GPIO_Pin_15;
+    GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP;
+    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_100MHz;
+    GPIO_Init(GPIOB, &GPIO_InitStruct);
+    SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource15);
+
+    /* PB12 is connected to EXTI_Line12 */
+    EXTI_InitStruct.EXTI_Line = GPIO_Pin_15;
+    /* Enable interrupt */
+    EXTI_InitStruct.EXTI_LineCmd = ENABLE;
+    /* Interrupt mode */
+    EXTI_InitStruct.EXTI_Mode = EXTI_Mode_Interrupt;
+    /* Triggers on rising and falling edge */
+    EXTI_InitStruct.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
+    /* Add to EXTI */
+    EXTI_Init(&EXTI_InitStruct);
+
+    /* Add IRQ vector to NVIC */
+    /* PB12 is connected to EXTI_Line12, which has EXTI15_10_IRQn vector */
+    NVIC_InitStruct.NVIC_IRQChannel = EXTI15_10_IRQn;
+    /* Set priority */
+    NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0x00;
+    /* Set sub priority */
+    NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0x01;
+    /* Enable interrupt */
+    NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+    /* Add to NVIC */
+    NVIC_Init(&NVIC_InitStruct);
+}
+void EXTI9_5_IRQHandler(void) {
+  	if (EXTI_GetITStatus(EXTI_Line9) != RESET){
+
+	if(a==1){
+	    TM_RTC_GetDateTime(&datatime, TM_RTC_Format_BIN);
+
+	    if(b==0){
+
+	    	if(hourstemp<=23){hourstemp+=1;}
+	    	if(hourstemp==24){hourstemp=0;}
+
+	    	wyswietl_date_hours();
+
+			PCD8544_GotoXY(5, 32);
+			PCD8544_Puts("Ustaw godzine.", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+			PCD8544_Refresh();
+
+	    }
+
+	    if(b==1){
+	    	if(minutestemp<=59){minutestemp+=1;}
+	    	if(minutestemp==60){minutestemp=0;}
+
+	    	wyswietl_date_hours();
+
+			PCD8544_GotoXY(5, 32);
+			PCD8544_Puts("Ustaw minuty.", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+			PCD8544_Refresh();
+
+	    }
+		if(b==2){
+			if(daytemp<=31){daytemp+=1;}
+			if(daytemp==32){daytemp=1;}
+
+	    	wyswietl_date_hours();
+
+			PCD8544_GotoXY(5, 32);
+			PCD8544_Puts("Ustaw dzien.", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+			PCD8544_Refresh();
+
+		}
+		if(b==3){
+
+			if(monthtemp<=12){monthtemp+=1;}
+			if(monthtemp==13){monthtemp=1;}
+
+	    	wyswietl_date_hours();
+
+			PCD8544_GotoXY(5, 32);
+			PCD8544_Puts("Ustaw miesiac.", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+			PCD8544_Refresh();
+
+		}
+		if(b==4){
+			if(yeartemp<=99){yeartemp+=1;}
+			if(yeartemp==100){yeartemp=1;}
+
+	    	wyswietl_date_hours();
+
+			PCD8544_GotoXY(5, 32);
+			PCD8544_Puts("Ustaw rok.", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+			PCD8544_Refresh();
+		}
+
+		}
+
+		if(a==2)
+		{
+			if(b==0)
+			{
+				alarmhours+=1;
+					if(alarmhours==24)
+					{
+						alarmhours=0;
+					}
+					wyswietl_alarm();
+
+					PCD8544_GotoXY(5, 13);
+					PCD8544_Puts("Ustaw godzine. ", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+					PCD8544_Refresh();
+					//edytujesz godzinê	alarmu
+			}
+			if(b==1)
+			{
+				alarmminutes+=1;
+				if(alarmminutes==60){alarmminutes=0;}
+					wyswietl_alarm();
+
+					PCD8544_GotoXY(5, 13);
+					PCD8544_Puts("Ustaw minuty. ", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+					PCD8544_Refresh();
+					//edytujesz godzinê	alarmu
+			}
+
+}
+
+  		EXTI_ClearITPendingBit(EXTI_Line9);  /* Clear interrupt flag */
+  		        }
+}
+
+
+
 /* Handle PB12 interrupt */
 void EXTI15_10_IRQHandler(void) {
-    /* Make sure that interrupt flag is set */
+
+    if (EXTI_GetITStatus(EXTI_Line11) != RESET)
+	{
+
+    	if(a==1)
+    	{
+    		b++;
+    		if(b==1)
+    		{
+    			wyswietl_date_hours();
+    			PCD8544_GotoXY(5, 32);
+    			PCD8544_Puts("Ustaw minuty.", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+    			PCD8544_Refresh();
+	//edytujesz minuty
+    		}
+    		if(b==2)
+    		{
+    			wyswietl_date_hours();
+    			PCD8544_GotoXY(5, 32);
+    			PCD8544_Puts("Ustaw dzien.", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+    			PCD8544_Refresh();
+
+	//edytujesz dzieñ
+    		}
+    		if(b==3)
+    		{
+    			wyswietl_date_hours();
+    			PCD8544_GotoXY(5, 32);
+    			PCD8544_Puts("Ustaw miesiac.", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+    			PCD8544_Refresh();
+    			//edytujesz miesi¹c
+    		}
+    		if(b==4)
+    		{
+    			wyswietl_date_hours();
+    		   	PCD8544_GotoXY(5, 32);
+    		    PCD8544_Puts("Ustaw rok.", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+    		    PCD8544_Refresh();
+	//edytujesz rok
+
+    		}
+    		if(b==5)
+    		{
+    			wyswietl_date_hours();
+    			PCD8544_GotoXY(5, 32);
+    			PCD8544_Puts("Ustaw godzine.", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+    			PCD8544_Refresh();
+    			b=0;
+
+    			datatime.hours=hourstemp;
+    			datatime.minutes=minutestemp;
+    			datatime.year=yeartemp;
+    			datatime.month=monthtemp;
+    			datatime.date=daytemp;
+
+    			TM_RTC_SetDateTime(&datatime, TM_RTC_Format_BIN); // pierwsze automatyczne ustawienie godziny i czasu
+
+    		}//ZAPISAC DATE!!!!!
+}
+if(a==2)
+{
+	b++;
+	if(b==1)
+	{
+		wyswietl_alarm();
+
+		PCD8544_GotoXY(5, 13);
+		PCD8544_Puts("Ustaw minuty. ", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+		PCD8544_Refresh();
+	//edytujesz minuty	alarmu
+
+	}
+	if(b==2)
+	{
+		wyswietl_alarm();
+
+		PCD8544_GotoXY(5, 13);
+		PCD8544_Puts("Ustaw godzine. ", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+		PCD8544_Refresh();
+		b=0;
+	}
+}
+
+EXTI_ClearITPendingBit(EXTI_Line11);  /* Clear interrupt flag */
+}
 
 
-    if (EXTI_GetITStatus(EXTI_Line11) != RESET) {
+    if (EXTI_GetITStatus(EXTI_Line12) != RESET)
+    {
             /* Do your stuff when PB12 is changed */
 
-        	for(int i=0;i<5;i++){
-        	    	    			GPIO_SetBits(GPIOD,GPIO_Pin_12);
-        	    	    			for (int g=0;g<1000000;g++){};
-        	    	    			GPIO_ResetBits(GPIOD,GPIO_Pin_12);
-        	    	    			for (int g=0;g<1000000;g++){};
-        	    	    	}
-          EXTI_ClearITPendingBit(EXTI_Line11);  /* Clear interrupt flag */
+    	if(a==2)
+    	{
+    		if(active==0)
+    		{
+    			active=1;
+    		}
+    		else {active=0;}
+
+    	}
+
+
+		EXTI_ClearITPendingBit(EXTI_Line12);  /* Clear interrupt flag */
         }
 
-
-    if (EXTI_GetITStatus(EXTI_Line12) != RESET) {
+if (EXTI_GetITStatus(EXTI_Line13) != RESET)
+{
             /* Do your stuff when PB12 is changed */
 
-        	for(int i=0;i<5;i++){
-        	    	    			GPIO_SetBits(GPIOD,GPIO_Pin_13);
-        	    	    			for (int g=0;g<1000000;g++){};
-        	    	    			GPIO_ResetBits(GPIOD,GPIO_Pin_13);
-        	    	    			for (int g=0;g<1000000;g++){};
-        	    	    	}
-          EXTI_ClearITPendingBit(EXTI_Line12);  /* Clear interrupt flag */
-        }
+	if(a==1)
+	{
+			TM_RTC_GetDateTime(&datatime, TM_RTC_Format_BIN);
+			if(b==0)
+			{
+				if(hourstemp>=0){hourstemp-=1;}
+				if(hourstemp==-1){hourstemp=23;}
 
-    if (EXTI_GetITStatus(EXTI_Line13) != RESET) {
-            /* Do your stuff when PB12 is changed */
+    			wyswietl_date_hours();
+    			PCD8544_GotoXY(5, 32);
+    			PCD8544_Puts("Ustaw godzine.", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
 
-        	for(int i=0;i<5;i++){
-        	    	    			GPIO_SetBits(GPIOD,GPIO_Pin_14);
-        	    	    			for (int g=0;g<1000000;g++){};
-        	    	    			GPIO_ResetBits(GPIOD,GPIO_Pin_14);
-        	    	    			for (int g=0;g<1000000;g++){};
-        	    	    	}
-          EXTI_ClearITPendingBit(EXTI_Line13);  /* Clear interrupt flag */
-        }
-    if (EXTI_GetITStatus(EXTI_Line14) != RESET) {
+    			PCD8544_Refresh();
+
+			}
+			if(b==1)
+			{
+				if(minutestemp>=0){minutestemp-=1;}
+				if(minutestemp==-1){minutestemp=59;}
+
+    			wyswietl_date_hours();
+    			PCD8544_GotoXY(5, 32);
+    			PCD8544_Puts("Ustaw minuty.", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+    			PCD8544_Refresh();
+			}
+			if(b==2)
+			{
+				if(daytemp>=1){daytemp-=1;}
+				if(daytemp==0){daytemp=31;}
+
+    			wyswietl_date_hours();
+    			PCD8544_GotoXY(5, 32);
+    			PCD8544_Puts("Ustaw dzien.", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+    			PCD8544_Refresh();
+			}
+			if(b==3)
+			{
+				if(monthtemp>=1){monthtemp-=1;}
+				if(monthtemp==0){monthtemp=12;}
+
+    			wyswietl_date_hours();
+    			PCD8544_GotoXY(5, 32);
+    			PCD8544_Puts("Ustaw miesiac.", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+    			PCD8544_Refresh();
+			}
+			if(b==4)
+			{
+				if(yeartemp>=1){yeartemp-=1;}
+				if(yeartemp==0){yeartemp=99;}
+
+    			wyswietl_date_hours();
+    			PCD8544_GotoXY(5, 32);
+    			PCD8544_Puts("Ustaw rok.", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+    			PCD8544_Refresh();
+			}
+
+	}
+
+    if(a==2)
+    {
+    	if(b==0)
+    	{
+    		alarmhours-=1;
+    		if(alarmhours==-1){alarmhours=23;}
+
+    		wyswietl_alarm();
+
+    		PCD8544_GotoXY(5, 13);
+    		PCD8544_Puts("Ustaw godziny. ", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+    		PCD8544_Refresh();
+
+    	//edytujesz godzinê	alarmu
+    	}
+    	if(b==1)
+    	{
+    		alarmminutes-=1;
+    		if(alarmminutes==-1){alarmminutes=59;}
+
+    		wyswietl_alarm();
+
+    		PCD8544_GotoXY(5, 13);
+    		PCD8544_Puts("Ustaw minuty. ", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+    		PCD8544_Refresh();
+    	//edytujesz minuty alarmu
+
+    	}
+    }
+   EXTI_ClearITPendingBit(EXTI_Line13);  /* Clear interrupt flag */
+}
+
+if (EXTI_GetITStatus(EXTI_Line14) != RESET)
+{
+
                /* Do your stuff when PB12 is changed */
+	a++;
+	if(a==3){a=0;}
+	if(a==1)
+	{
+		b=0;
+	//pierwszy ekran
+		wyswietl_date_hours();
+		PCD8544_GotoXY(5, 32);
+		PCD8544_Puts("Ustaw godzine.", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
 
-           	for(int i=0;i<5;i++){
-           	    	    			GPIO_SetBits(GPIOD,GPIO_Pin_15);
-           	    	    			for (int g=0;g<1000000;g++){};
-           	    	    			GPIO_ResetBits(GPIOD,GPIO_Pin_15);
-           	    	    			for (int g=0;g<1000000;g++){};
-           	    	    	}
-             EXTI_ClearITPendingBit(EXTI_Line14);  /* Clear interrupt flag */
-           }
+		PCD8544_Refresh();
 
+
+	//edytujesz godzinê
+
+	}
+	if(a==2)
+	{
+		b=0;
+
+		wyswietl_alarm();
+
+		PCD8544_GotoXY(5, 13);
+		PCD8544_Puts("Ustaw godziny. ", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
+
+		PCD8544_Refresh();
+
+		PCD8544_Refresh();
+	//edytujesz godzinê	alarmu
+
+	}
+	if(a==0)
+	{
+		wyswietl_wszystko();
+
+		PCD8544_Refresh();
+	}
+
+    EXTI_ClearITPendingBit(EXTI_Line14);  /* Clear interrupt flag */
+}
+
+
+ if (EXTI_GetITStatus(EXTI_Line15) != RESET) {
+            /* Do your stuff when PB12 is changed */
+
+          EXTI_ClearITPendingBit(EXTI_Line15);  /* Clear interrupt flag */
+        }
 }
 
 
@@ -235,120 +818,67 @@ void Init_Diod() {
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
 	GPIO_Init(GPIOD, &GPIO_InitStructure);
 }
+void  alarm(){
 
 
-void Init_Tim4(){
-	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-	/* Time base configuration */
-	TIM_TimeBaseStructure.TIM_Period = 1000;
-	TIM_TimeBaseStructure.TIM_Prescaler = 7199;
-	TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
-	TIM_Cmd(TIM4, ENABLE);
+	while(active==1){
+		   for(int i=0;i<5;i++)
+		{
+			            	   GPIO_SetBits(GPIOD,GPIO_Pin_15|GPIO_Pin_14|GPIO_Pin_13);
+			            	   for (int g=0;g<1000000;g++){};
+			            	   GPIO_ResetBits(GPIOD,GPIO_Pin_15|GPIO_Pin_14|GPIO_Pin_13);
+			            	   for (int g=0;g<1000000;g++){};
+
+		}
+	}
 }
+
 
 int main(void)
 {
-
-
 	SystemInit();
 	Init_Diod();
-	Init_Tim4();
-	PCD8544_Init(0x38);
+	Configure_PB9();
 
-	TM_RTC_Init(TM_RTC_ClockSource_Internal);
-
-    TM_RTC_Interrupts(TM_RTC_Int_1s);
-    		datatime.hours = 14;
-            datatime.minutes = 56;
-            datatime.seconds = 0;
-            datatime.year = 14;
-            datatime.month = 6;
-            datatime.date = 30;
-            datatime.day = 6;
-    TM_RTC_SetDateTime(&datatime, TM_RTC_Format_BIN); // pierwsze automatyczne ustawienie godziny i czasu
-
+	Configure_PB11();
 	Configure_PB12();
 	Configure_PB13();
 	Configure_PB14();
-	Configure_PB11();
-
-	int mrugaj=0;
-
-	TM_RTC_GetDateTime(&datatime, TM_RTC_Format_BIN);
-	int h=datatime.hours;
-	char temp[16];
-	itoa(h, temp, 10);
-
-	int m=datatime.minutes;
-	char temp1[16];
-	itoa(m, temp1, 10);
-
-	int s=datatime.seconds;
-	char temp2[16];
-	itoa(s, temp2, 10);
-
-	while (1) {
+	Configure_PB15();
+	PCD8544_Init(0x38);
+	if (!TM_RTC_Init(TM_RTC_ClockSource_Internal)) {	}
+    TM_RTC_Interrupts(TM_RTC_Int_1s);
+	   datatime.hours = 12;
+	   datatime.minutes = 0;
+	   datatime.seconds = 5;
+	   datatime.year = 16;
+	   datatime.month = 6;
+	   datatime.date = 30;
+	   datatime.day = 6;
+   TM_RTC_SetDateTime(&datatime, TM_RTC_Format_BIN); // pierwsze automatyczne ustawienie godziny i czasu
 
 
-		if(TIM_GetFlagStatus(TIM4, TIM_FLAG_Update))
-				{
-					GPIO_ToggleBits(GPIOD,GPIO_Pin_14);
-
-					if(mrugaj==0)
-					{
-
-
-						PCD8544_Clear();
-
-						PCD8544_GotoXY(5, 3);
-						PCD8544_Puts("TIME:", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
-						PCD8544_GotoXY(30, 3);
-						PCD8544_Puts(temp, PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
-						PCD8544_GotoXY(42, 3);
-						PCD8544_Puts(":", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
-						PCD8544_GotoXY(48, 3);
-						PCD8544_Puts(temp1, PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
-						PCD8544_GotoXY(60, 3);
-						PCD8544_Puts(":", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
-						PCD8544_GotoXY(66, 3);
-						PCD8544_Puts(temp2, PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
-						PCD8544_GotoXY(5, 13);
-						PCD8544_Puts("ALARM:", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
-						PCD8544_GotoXY(40, 13);
-						PCD8544_Puts(":)", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
-						PCD8544_GotoXY(5, 26);
-						PCD8544_Puts("DATE:2015-04-18", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
-
-						PCD8544_Refresh();
-						mrugaj++;
-					}
-					else{
-						PCD8544_Clear();
-
-						PCD8544_GotoXY(5, 3);
-						PCD8544_Puts("TIME:", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
-						PCD8544_GotoXY(30, 3);
-						PCD8544_Puts("", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
-						PCD8544_GotoXY(5, 13);
-						PCD8544_Puts("ALARM:", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
-						PCD8544_GotoXY(40, 13);
-						PCD8544_Puts("", PCD8544_Pixel_Set, PCD8544_FontSize_5x7);
-						PCD8544_GotoXY(5, 26);
-						PCD8544_Puts("DATE:2015-04-18", PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
-
-						PCD8544_Refresh();
-						mrugaj=0;
-					}
-					TIM_ClearFlag(TIM4, TIM_FLAG_Update);
-				}
-	}
+while (1) {}
 }
 
 void TM_RTC_RequestHandler() {
     //Get time
-    TM_RTC_GetDateTime(&datatime, TM_RTC_Format_BIN);
+	   TM_RTC_GetDateTime(&datatime, TM_RTC_Format_BIN);
+//sprawdza czy nie jest wlaczony tryb edycji
+	   if(active==1)
+	   {
+		   if(alarmhours==datatime.hours)
+		   {
+			   	 if(alarmminutes==datatime.minutes)
+			   	 {
+			   		 alarm();
+			   	 }
+		   }
+	   }
+	   if(a==0)
+	   {
+		   wyswietl_wszystko();
+	   }
 
 }
+
