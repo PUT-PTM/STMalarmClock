@@ -1,4 +1,8 @@
 *.cogui
 *.coproj
 *.comarker
+*.bin
+*.elf
+*.hex
+*.map
 .gitignore
