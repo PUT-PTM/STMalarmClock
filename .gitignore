@@ -2,4 +2,6 @@
 *.coproj
 *.comarker
 *.bin
+*.elf
+*.hex
 .gitignore
