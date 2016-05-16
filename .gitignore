@@ -4,4 +4,5 @@
 *.bin
 *.elf
 *.hex
+*.map
 .gitignore
