@@ -44,7 +44,7 @@ CooCox CoIDE, Version 1.7.8
 2. [This is PCD8544 library] (http://stm32f4-discovery.net/pcd8544-nokia-33105110-lcd-stm32f429-discovery-library/)
 
 ## Made by 
- 1. Patrym Smól 
+ 1. Patryk Smól 
  2. Marcin Skorupiński 
  
 #### [Short film which presents how it works.] (https://www.youtube.com/watch?edit=vd&v=AwXuFz8WyZg)
