@@ -42,6 +42,7 @@ CooCox CoIDE, Version 1.7.8
 ##Libraries by Tilen Majerle 
 >[This is RTC library] (http://stm32f4-discovery.net/2014/07/library-19-use-internal-rtc-on-stm32f4xx-devices/)
 >[This is PCD8544 library] (http://stm32f4-discovery.net/pcd8544-nokia-33105110-lcd-stm32f429-discovery-library/)
+
 ## Made by 
  1. Patrym Smól 
  2. Marcin Skorupiński 
