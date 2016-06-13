@@ -1,68 +1,68 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
-   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F407VG -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -I..\..\..\..\..\Users\marcin\Desktop\alarm -I..\..\..\..\..\Users\marcin\Desktop\alarm\cmsis -I..\..\..\..\..\Users\marcin\Desktop -I..\..\..\..\..\Users\marcin\Desktop\alarm\cmsis_boot -I..\..\..\..\..\Users\marcin\Desktop\alarm\cmsis_lib -I..\..\..\..\..\Users\marcin\Desktop\alarm\cmsis_lib\include">
-      <target file="stm32f4xx_exti.o" lastModified="155032ab042">
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F407VG -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -I..\..\..\..\..\Users\marcin\Documents\GitHub\STMalarmClock\alarm\cmsis -I..\..\..\..\..\Users\marcin\Documents\GitHub\STMalarmClock\alarm -I..\..\..\..\..\Users\marcin\Documents\GitHub\STMalarmClock -I..\..\..\..\..\Users\marcin\Documents\GitHub\STMalarmClock\alarm\cmsis_boot -I..\..\..\..\..\Users\marcin\Documents\GitHub\STMalarmClock\alarm\cmsis_lib\include -I..\..\..\..\..\Users\marcin\Documents\GitHub\STMalarmClock\alarm\cmsis_lib">
+      <target file="stm32f4xx_exti.o" lastModified="1554bae02c7">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_exti.c" lastModified="1542aec5947"/>
       </target>
-      <target file="stm32f4xx_gpio.o" lastModified="155032aae1e">
+      <target file="stm32f4xx_gpio.o" lastModified="1554bae007f">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="155011aa45f"/>
       </target>
-      <target file="stm32f4xx_rtc.o" lastModified="155032ab26c">
+      <target file="stm32f4xx_rtc.o" lastModified="1554bae0526">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_rtc.c" lastModified="1542af24b7e"/>
       </target>
-      <target file="display.o" lastModified="155032aad25">
-         <source file="..\..\..\cmsis_lib\source\display.c" lastModified="155014d6171"/>
+      <target file="display.o" lastModified="1554badff75">
+         <source file="..\..\..\cmsis_lib\source\display.c" lastModified="1554ba09fa0"/>
       </target>
-      <target file="tm_stm32f4_gpio.o" lastModified="155032ab1a4">
+      <target file="tm_stm32f4_gpio.o" lastModified="1554bae0448">
          <source file="..\..\..\cmsis_lib\source\tm_stm32f4_gpio.c" lastModified="153ecb23582"/>
       </target>
-      <target file="stm32f4xx_syscfg.o" lastModified="155032aaa09">
+      <target file="stm32f4xx_syscfg.o" lastModified="1554badfc39">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_syscfg.c" lastModified="1542aec598d"/>
       </target>
-      <target file="startup_stm32f4xx.o" lastModified="155032aabc5">
+      <target file="startup_stm32f4xx.o" lastModified="1554badfdf0">
          <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="1542aec588c"/>
       </target>
-      <target file="stm32f4xx_tim.o" lastModified="155032ab378">
+      <target file="stm32f4xx_tim.o" lastModified="1554bae0643">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_tim.c" lastModified="1542af274ba"/>
       </target>
-      <target file="system_stm32f4xx.o" lastModified="155032aae7b">
+      <target file="system_stm32f4xx.o" lastModified="1554bae00dc">
          <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="1542aec58b7"/>
       </target>
-      <target file="misc.o" lastModified="155032ab131">
+      <target file="misc.o" lastModified="1554bae03c9">
          <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="1542aec593a"/>
       </target>
-      <target file="sound.o" lastModified="155032aaa76">
-         <source file="..\..\..\cmsis_lib\source\sound.c" lastModified="15502f7db79"/>
+      <target file="sound.o" lastModified="1554badfca9">
+         <source file="..\..\..\cmsis_lib\source\sound.c" lastModified="1554b8abe41"/>
       </target>
-      <target file="stm32f4xx_spi.o" lastModified="155032aafe2">
+      <target file="stm32f4xx_spi.o" lastModified="1554bae0264">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_spi.c" lastModified="1542af7f62f"/>
       </target>
-      <target file="tm_stm32f4_rtc.o" lastModified="155032aaf5a">
+      <target file="tm_stm32f4_rtc.o" lastModified="1554bae01d1">
          <source file="..\..\..\cmsis_lib\source\tm_stm32f4_rtc.c" lastModified="15501efe05f"/>
       </target>
-      <target file="tm_stm32f4_pcd8544.o" lastModified="155032ab3fd">
+      <target file="tm_stm32f4_pcd8544.o" lastModified="1554bae06da">
          <source file="..\..\..\cmsis_lib\source\tm_stm32f4_pcd8544.c" lastModified="1542a3d9279"/>
       </target>
-      <target file="stm32f4xx_rcc.o" lastModified="155032aacad">
+      <target file="stm32f4xx_rcc.o" lastModified="1554badfefa">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="1542aec5972"/>
       </target>
-      <target file="stm32f4xx_pwr.o" lastModified="155032aaaed">
+      <target file="stm32f4xx_pwr.o" lastModified="1554badfd11">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_pwr.c" lastModified="1542b4d6f68"/>
       </target>
-      <target file="stm32f4xx_dac.o" lastModified="155032aab80">
+      <target file="stm32f4xx_dac.o" lastModified="1554badfd94">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_dac.c" lastModified="15501617843"/>
       </target>
-      <target file="syscalls.o" lastModified="155032aaec4">
+      <target file="syscalls.o" lastModified="1554bae0139">
          <source file="..\..\..\syscalls\syscalls.c" lastModified="1542aec59cb"/>
       </target>
-      <target file="tm_stm32f4_spi.o" lastModified="155032aadaa">
+      <target file="tm_stm32f4_spi.o" lastModified="1554bae0004">
          <source file="..\..\..\cmsis_lib\source\tm_stm32f4_spi.c" lastModified="153ed2a2900"/>
       </target>
-      <target file="config_button.o" lastModified="155032ab0d8">
-         <source file="..\..\..\cmsis_lib\source\config_button.c" lastModified="155032aa768"/>
+      <target file="config_button.o" lastModified="1554bae0364">
+         <source file="..\..\..\cmsis_lib\source\config_button.c" lastModified="1554bac2792"/>
       </target>
-      <target file="main.o" lastModified="155032aac2a">
-         <source file="..\..\..\main.c" lastModified="155030a0f0a"/>
+      <target file="main.o" lastModified="1554badfe5b">
+         <source file="..\..\..\main.c" lastModified="1554bac27a9"/>
       </target>
    </processor>
 </history>

@@ -1,28 +1,28 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
    <processor signature="arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -g -nostartfiles -Map=alarm.map -O0 --gc-sections -lm -lgcc -lc -LC:\CooCox\CoIDE\configuration\ProgramData\alarm -TC:\CooCox\CoIDE\configuration\ProgramData\alarm/arm-gcc-link.ld -g">
-      <target file="alarm.elf" lastModified="155032ab601">
-         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="155032aaa09"/>
-         <source file="..\obj\sound.o" lastModified="155032aaa76"/>
-         <source file="..\obj\stm32f4xx_pwr.o" lastModified="155032aaaed"/>
-         <source file="..\obj\stm32f4xx_dac.o" lastModified="155032aab80"/>
-         <source file="..\obj\startup_stm32f4xx.o" lastModified="155032aabc5"/>
-         <source file="..\obj\main.o" lastModified="155032aac2a"/>
-         <source file="..\obj\stm32f4xx_rcc.o" lastModified="155032aacad"/>
-         <source file="..\obj\display.o" lastModified="155032aad25"/>
-         <source file="..\obj\tm_stm32f4_spi.o" lastModified="155032aadaa"/>
-         <source file="..\obj\stm32f4xx_gpio.o" lastModified="155032aae1e"/>
-         <source file="..\obj\system_stm32f4xx.o" lastModified="155032aae7b"/>
-         <source file="..\obj\syscalls.o" lastModified="155032aaec4"/>
-         <source file="..\obj\tm_stm32f4_rtc.o" lastModified="155032aaf5a"/>
-         <source file="..\obj\stm32f4xx_spi.o" lastModified="155032aafe2"/>
-         <source file="..\obj\stm32f4xx_exti.o" lastModified="155032ab042"/>
-         <source file="..\obj\config_button.o" lastModified="155032ab0d8"/>
-         <source file="..\obj\misc.o" lastModified="155032ab131"/>
-         <source file="..\obj\tm_stm32f4_gpio.o" lastModified="155032ab1a4"/>
-         <source file="..\obj\stm32f4xx_rtc.o" lastModified="155032ab26c"/>
-         <source file="..\obj\stm32f4xx_tim.o" lastModified="155032ab378"/>
-         <source file="..\obj\tm_stm32f4_pcd8544.o" lastModified="155032ab3fd"/>
+      <target file="alarm.elf" lastModified="1554bae08e2">
+         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="1554badfc39"/>
+         <source file="..\obj\sound.o" lastModified="1554badfca9"/>
+         <source file="..\obj\stm32f4xx_pwr.o" lastModified="1554badfd11"/>
+         <source file="..\obj\stm32f4xx_dac.o" lastModified="1554badfd94"/>
+         <source file="..\obj\startup_stm32f4xx.o" lastModified="1554badfdf0"/>
+         <source file="..\obj\main.o" lastModified="1554badfe5b"/>
+         <source file="..\obj\stm32f4xx_rcc.o" lastModified="1554badfefa"/>
+         <source file="..\obj\display.o" lastModified="1554badff75"/>
+         <source file="..\obj\tm_stm32f4_spi.o" lastModified="1554bae0004"/>
+         <source file="..\obj\stm32f4xx_gpio.o" lastModified="1554bae007f"/>
+         <source file="..\obj\system_stm32f4xx.o" lastModified="1554bae00dc"/>
+         <source file="..\obj\syscalls.o" lastModified="1554bae0139"/>
+         <source file="..\obj\tm_stm32f4_rtc.o" lastModified="1554bae01d1"/>
+         <source file="..\obj\stm32f4xx_spi.o" lastModified="1554bae0264"/>
+         <source file="..\obj\stm32f4xx_exti.o" lastModified="1554bae02c7"/>
+         <source file="..\obj\config_button.o" lastModified="1554bae0364"/>
+         <source file="..\obj\misc.o" lastModified="1554bae03c9"/>
+         <source file="..\obj\tm_stm32f4_gpio.o" lastModified="1554bae0448"/>
+         <source file="..\obj\stm32f4xx_rtc.o" lastModified="1554bae0526"/>
+         <source file="..\obj\stm32f4xx_tim.o" lastModified="1554bae0643"/>
+         <source file="..\obj\tm_stm32f4_pcd8544.o" lastModified="1554bae06da"/>
       </target>
    </processor>
 </history>

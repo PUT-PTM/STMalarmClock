@@ -14,9 +14,9 @@
 
 
 
- void wyswietl_wszystko();
- void wyswietl_date_hours();
- void wyswietl_alarm();
+ void display_all();
+ void display_date_hours();
+ void display_alarm();
 
 
 #ifdef __cplusplus

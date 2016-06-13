@@ -6,7 +6,7 @@
 #endif
 
  extern float i;
- extern	int zwiekszaj;
+ extern	int increase;
 
 void DACinit();
 void Delay(__IO uint32_t nCount);

@@ -2,9 +2,22 @@
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_rcc.h"
 #include "math.h"
+#include "stm32f4xx_tim.h"
 
 float i=0;
-int zwiekszaj = 1;
+int increase = 1;
+
+void timer_sound()
+{
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
+
+	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+	TIM_TimeBaseStructure.TIM_Period = 125-1;
+	TIM_TimeBaseStructure.TIM_Prescaler = 250-1;
+	TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+	TIM_TimeBaseStructure.TIM_CounterMode =  TIM_CounterMode_Up;
+	TIM_TimeBaseInit(TIM6, &TIM_TimeBaseStructure);
+}
 
 void DACinit()
 {
@@ -49,13 +62,19 @@ void Delay(__IO uint32_t nCount)
 void Play()
 {
 
-	Delay(100);
+	TIM_Cmd(TIM6, ENABLE);
+	if(TIM_GetFlagStatus(TIM6, TIM_FLAG_Update)) {
+   	 GPIO_ToggleBits(GPIOD,GPIO_Pin_14);
 
-	DAC_SetChannel1Data(DAC_Align_12b_R, (sin(i)*4095));
-	if(i<4095 && zwiekszaj == 1)i+=1;
-	if(i>=4095)zwiekszaj=0;
-		if(zwiekszaj == 0){
-			i-=1;}
 
-	if (i==0) zwiekszaj = 1;
+		DAC_SetChannel1Data(DAC_Align_12b_R, (sin(i)*4095));
+	    		if(i<4095 && increase == 1)i+=1;
+	    		if(i>=4095)increase=0;
+	    			if(increase == 0){
+	    				i-=1;}
+
+	    		if (i==0) increase = 1;
+	TIM_ClearFlag(TIM6, TIM_FLAG_Update);
+	TIM_Cmd(TIM6, DISABLE);
+	}
 }

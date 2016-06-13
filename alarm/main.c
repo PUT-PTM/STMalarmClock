@@ -14,30 +14,27 @@
 
  TM_RTC_Time_t datatime;
 
-void przycisk (){
-	for (int i=0; i<100;i++);
-}
+
 
 int main(void)
 {
 	SystemInit();
 	SystemCoreClockUpdate();
-timer();
+	timer();
 
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
 
 
 	DACinit();
-timer();
+	timer();
 	Configure_PB9();
 	Configure_PB11();
 	Configure_PB12();
 	Configure_PB13();
 	Configure_PB14();
-	Configure_PB15();
 	PCD8544_Init(0x38);
-
+	timer_sound();
 
 
 
@@ -55,7 +52,7 @@ timer();
 
    while (1)
    {
-	  graj();
+	  play();
 
    }
 }

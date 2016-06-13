@@ -8,10 +8,10 @@
  TM_RTC_Time_t datatime;
 
 
-void wyswietl_wszystko()
+void display_all()
 {
     TM_RTC_GetDateTime(&datatime, TM_RTC_Format_BIN);
-
+//konwersja aktualnej godziny i daty do typu int
 	int h=datatime.hours;
 	char hours[16];
 	itoa(h, hours, 10);
@@ -44,7 +44,7 @@ void wyswietl_wszystko()
 	char minutes_alarm[16];
 	itoa(min, minutes_alarm, 10);
 
-//wyswietlanie w jednym kolorze czarnym godziny i daty
+//wyswietlanie godziny i daty
 	PCD8544_Clear();
 
 	PCD8544_GotoXY(5, 3);
@@ -98,7 +98,7 @@ void wyswietl_wszystko()
 
 	PCD8544_Refresh();
 }
-void wyswietl_date_hours()
+void display_date_hours()
 {
 			int h=hourstemp;
 			char hours[16];
@@ -145,8 +145,8 @@ void wyswietl_date_hours()
 			PCD8544_Puts(day, PCD8544_Pixel_Set, PCD8544_FontSize_3x5);
 
 }
-
-void wyswietl_alarm()
+//wyswietlanie menu alarm
+void display_alarm()
 {
 	int h=alarmhours;
 	char hours[16];
